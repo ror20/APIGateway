@@ -49,7 +49,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>RORAPIGateway</finalName>
 	</build>
 
 	<properties>
