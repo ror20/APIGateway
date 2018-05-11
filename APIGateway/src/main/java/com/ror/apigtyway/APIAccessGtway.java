@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -42,7 +41,7 @@ public class APIAccessGtway {
 	String deleteUser;
 
 	@RequestMapping(value = "/fetchAllUsers", produces = "application/json", method = RequestMethod.GET)
-	public @ResponseBody List<RORUser> getUser() {
+	public List<RORUser> getUser() {
 		List<RORUser> rorUserList = null;
 		if (getAllUsers == null) {
 			return rorUserList;
@@ -61,14 +60,15 @@ public class APIAccessGtway {
 		return rorUserList;
 	}
 
-	@RequestMapping(value = "/fetchUser/{id}", method = RequestMethod.GET)
-	public @ResponseBody RORUser fetchUser(@PathVariable("id") String userId) {
+	@RequestMapping(value = "/fetchUser/{id}", method = RequestMethod.GET, produces = "application/json")
+	public RORUser fetchUser(@PathVariable("id") String userId) {
 		RORUser rorUser = null;
 		if (restTemplate != null) {
-			fetchUser = MessageFormat.format(fetchUser, userId);
-			System.out.println("The final Url for fetch User is " + fetchUser);
+			System.out.println("user Id is "+userId);
+			String finalUrl = MessageFormat.format(fetchUser, userId);
+			System.out.println("The final Url for fetch User is " + finalUrl);
 			try {
-				rorUser = restTemplate.getForObject(new URI(fetchUser), RORUser.class);
+				rorUser = restTemplate.getForObject(new URI(finalUrl), RORUser.class);
 			} catch (RestClientException e) {
 				e.printStackTrace();
 			} catch (URISyntaxException e) {
@@ -80,11 +80,10 @@ public class APIAccessGtway {
 		return rorUser;
 	}
 
-	@RequestMapping(value = "/storeUser", method = RequestMethod.POST)
-	public @ResponseBody RORResponseVO storeUser(@RequestBody RORUser rorUser) {
+	@RequestMapping(value = "/storeUser", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public RORResponseVO storeUser(@RequestBody RORUser rorUser) {
 		RORResponseVO rorResponseVO = new RORResponseVO();
-		rorResponseVO.setStatusCode("500");
-		rorResponseVO.setStatusMessage("Internal Server Error");
+		System.out.println("Store user url is " + storeUser);
 		if (restTemplate != null) {
 			try {
 				rorResponseVO = restTemplate.postForObject(storeUser, rorUser, RORResponseVO.class);
@@ -97,31 +96,43 @@ public class APIAccessGtway {
 		return rorResponseVO;
 	}
 
-	@RequestMapping(value = "/updateUser", method = RequestMethod.PUT)
-	public void updateUser(@RequestBody RORUser rorUser) {
+	@RequestMapping(value = "/updateUser", method = RequestMethod.PUT, consumes = "application/json",produces = "application/json")
+	public RORResponseVO updateUser(@RequestBody RORUser rorUser) {
+		RORResponseVO rorResponseVO = new RORResponseVO();
+		rorResponseVO.setStatusCode("200");
+		rorResponseVO.setStatusMessage("User Updation Successful");
 		if (restTemplate != null) {
 			try {
 				restTemplate.put(updateUser, rorUser);
 			} catch (RestClientException e) {
+				rorResponseVO.setStatusCode("500");
+				rorResponseVO.setStatusMessage("User Updation Failed" + e.getMessage());
 				e.printStackTrace();
 			}
 		} else {
 			System.out.println("restTemplate is null");
 		}
+		return rorResponseVO;
 	}
 
-	@RequestMapping(value = "/deleteUser/{id}", method = RequestMethod.DELETE)
-	public void deleteUser(@PathVariable("id") String userId) {
-		deleteUser = MessageFormat.format(deleteUser, userId);
+	@RequestMapping(value = "/deleteUser/{id}", method = RequestMethod.DELETE, produces = "application/json")
+	public RORResponseVO deleteUser(@PathVariable("id") String userId) {
+		RORResponseVO rorResponseVO = new RORResponseVO();
+		rorResponseVO.setStatusCode("200");
+		rorResponseVO.setStatusMessage("User Deletion Successful");
+		String finalDeleteUser = MessageFormat.format(deleteUser, userId);
 		if (restTemplate != null) {
 			try {
-				restTemplate.delete(deleteUser);
+				restTemplate.delete(finalDeleteUser);
 			} catch (RestClientException e) {
+				rorResponseVO.setStatusCode("500");
+				rorResponseVO.setStatusMessage("User Deletion Failed" + e.getMessage());
 				e.printStackTrace();
 			}
 		} else {
 			System.out.println("restTemplate is null");
 		}
+		return rorResponseVO;
 	}
 
 }
