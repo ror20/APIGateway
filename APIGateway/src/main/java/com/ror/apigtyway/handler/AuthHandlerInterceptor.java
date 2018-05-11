@@ -13,6 +13,7 @@ public class AuthHandlerInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 		String authHeader = request.getHeader(AUTHORIZATION);
+		System.out.println(request.getRequestURL());
 		if (authHeader == null) {
 			return false;
 		}
@@ -20,15 +21,11 @@ public class AuthHandlerInterceptor extends HandlerInterceptorAdapter {
 			return false;
 		}
 		if (authHeader.toLowerCase().contains(BASIC)) {
+			System.out.println("basic is present");
 			String tokens[] = authHeader.split(" ");
 			byte[] decodedToken = Base64.getDecoder().decode(tokens[1]);
 			String userNamePass = new String(decodedToken);
 			return true;
-			/*String[] userPass = userNamePass.split(":");
-			System.out.println("username is " + userPass[0] + "password is " + userPass[1]);
-			if (userPass[0].equals("akash") && userPass[1].equals("akash")) {
-				return true;
-			}*/
 		}
 		return false;
 	}
