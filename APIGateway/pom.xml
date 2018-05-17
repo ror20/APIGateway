@@ -3,9 +3,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ror</groupId>
 	<artifactId>RORAPIGateway</artifactId>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>APIGateway Webapp</name>
 	<url>http://maven.apache.org</url>
 
 	<build>
@@ -45,7 +44,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.0.0</version>
 				<configuration>
-					<warSourceDirectory>WebContent</warSourceDirectory>
+					<warSourceDirectory>src</warSourceDirectory>
 				</configuration>
 			</plugin>
 		</plugins>
