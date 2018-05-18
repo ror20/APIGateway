@@ -16,6 +16,9 @@ public interface APIGatewayService {
 
 	RORResponseVO deleteUser(String userId);
 
+	boolean checkUserExists(String userId);
+	
+
 	default RORResponseVO getRORResponseVO(String code, String meString) {
 		RORResponseVO rorResponseVO = new RORResponseVO();
 		rorResponseVO.setStatusCode(code);
