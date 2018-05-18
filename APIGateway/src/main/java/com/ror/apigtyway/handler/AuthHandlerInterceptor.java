@@ -14,7 +14,7 @@ public class AuthHandlerInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 		String authHeader = request.getHeader(AUTHORIZATION);
-		System.out.println("The Following host has hit APIGateway" + request.getRequestURL());
+		System.out.println("The Following host has hit APIGateway" + request.getRequestURL()+authHeader);
 		if (authHeader != null && !authHeader.isEmpty()) {
 			System.out.println("Auth header is present allowing request");
 			if (authHeader.toLowerCase().contains(BASIC)) {
