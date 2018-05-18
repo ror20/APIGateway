@@ -14,7 +14,7 @@ import com.ror.model.RORUser;
 import com.ror.vo.RORResponseVO;
 
 @RestController
-@RequestMapping(value = "/apiGtway/api")
+@RequestMapping(value = "/rorAPIGateway")
 public class APIAccessGtway {
 
 	@Autowired
@@ -23,7 +23,6 @@ public class APIAccessGtway {
 	@RequestMapping(value = "/fetchAllUsers", produces = "application/json", method = RequestMethod.GET)
 	public List<RORUser> getUser() {
 		return apiGatewayServiceImpl.fetchAllUsers();
-
 	}
 
 	@RequestMapping(value = "/fetchUser/{id}", method = RequestMethod.GET, produces = "application/json")
@@ -44,6 +43,11 @@ public class APIAccessGtway {
 	@RequestMapping(value = "/deleteUser/{id}", method = RequestMethod.DELETE, produces = "application/json")
 	public RORResponseVO deleteUser(@PathVariable("id") String userId) {
 		return apiGatewayServiceImpl.deleteUser(userId);
+	}
+
+	@RequestMapping(value = "/checkUserExist/{id}", method = RequestMethod.GET, produces = "application/json")
+	public boolean checkUserExists(@PathVariable("id") String userId) {
+		return apiGatewayServiceImpl.checkUserExists(userId);
 	}
 
 }
