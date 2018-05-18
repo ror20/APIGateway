@@ -16,6 +16,7 @@ public class AuthHandlerInterceptor extends HandlerInterceptorAdapter {
 		String authHeader = request.getHeader(AUTHORIZATION);
 		System.out.println("The Following host has hit APIGateway" + request.getRequestURL());
 		if (authHeader != null && !authHeader.isEmpty()) {
+			System.out.println("Auth header is present allowing request");
 			if (authHeader.toLowerCase().contains(BASIC)) {
 				System.out.println("basic is present");
 				String tokens[] = authHeader.split(" ");
@@ -23,6 +24,8 @@ public class AuthHandlerInterceptor extends HandlerInterceptorAdapter {
 				String userNamePass = new String(decodedToken);
 				return true;
 			}
+		} else {
+			System.out.println("Auth header is not present make sure you set the Auth header and send");
 		}
 		response.setStatus(401);
 		return false;
