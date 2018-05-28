@@ -4,6 +4,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import com.ror.apigtyway.service.impl.APIGatewayServiceImpl;
 import com.ror.model.RORUser;
 import com.ror.vo.RORResponseVO;
 
+@CrossOrigin(origins = "https://ror20.herokuapp.com", maxAge = 3600)
 @RestController
 @RequestMapping(value = "/rorAPIGateway")
 public class APIAccessGtway {
@@ -49,14 +51,6 @@ public class APIAccessGtway {
 	@RequestMapping(value = "/checkUserExist/{id}", method = RequestMethod.GET, produces = "application/json")
 	public boolean checkUserExists(@PathVariable("id") String userId) {
 		return apiGatewayServiceImpl.checkUserExists(userId);
-	}
-	
-	@RequestMapping(value= "/**", method=RequestMethod.OPTIONS)
-	public void corsHeaders(HttpServletResponse response) {
-	    response.addHeader("Access-Control-Allow-Origin", "*");
-	    response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-	    response.addHeader("Access-Control-Allow-Headers", "origin, content-type, accept, x-requested-with");
-	    response.addHeader("Access-Control-Max-Age", "3600");
 	}
 
 }
