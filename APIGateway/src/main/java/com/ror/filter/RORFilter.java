@@ -42,9 +42,7 @@ public class RORFilter implements Filter {
 		System.out.println("Enabling CORS!!");
 		HttpServletResponse response1 = (HttpServletResponse) response;
 
-		HttpServletRequest request1 = (HttpServletRequest) request;
-
-		response1.setHeader("Access-Control-Allow-Origin", "*");
+		//response1.setHeader("Access-Control-Allow-Origin", "*");
 
 		response1.setHeader("Access-Control-Allow-Methods", "POST,PUT, GET, OPTIONS, DELETE");
 
