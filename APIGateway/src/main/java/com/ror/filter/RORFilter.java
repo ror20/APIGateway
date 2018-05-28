@@ -48,7 +48,7 @@ public class RORFilter implements Filter {
 
 		response1.setHeader("Access-Control-Allow-Methods", "POST,PUT, GET, OPTIONS, DELETE");
 
-		response1.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+		response1.setHeader("Access-Control-Allow-Headers", "x-requested-with,Authorization");
 		response1.setHeader("Access-Control-Allow-Credentials", "true");
 		
 
