@@ -51,7 +51,7 @@ public class RORFilter implements Filter {
 	        httpResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
         	httpResponse.setHeader("Access-Control-Allow-Headers", "X-Auth-Token, Content-Type");
 	        httpResponse.setHeader("Access-Control-Expose-Headers", "custom-header1, custom-header2");
-        	httpResponse.setHeader("Access-Control-Allow-Credentials", "false");
+        	httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
 	        httpResponse.setHeader("Access-Control-Max-Age", "4800");
 		chain.doFilter(request, httpResponse);
 	}
