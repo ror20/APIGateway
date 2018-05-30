@@ -43,19 +43,16 @@ public class RORFilter implements Filter {
 
 		// pass the request along the filter chain
 		System.out.println("Enabling CORS!!");
-		HttpServletResponse response1 = (HttpServletResponse) response;
+		HttpServletResponse httpResponse = (HttpServletResponse) response;
 
 		HttpServletRequest request1 = (HttpServletRequest) request;
 
-		response1.setHeader("Access-Control-Allow-Origin", "*");
-
-		response1.setHeader("Access-Control-Allow-Methods", "POST,PUT, GET, OPTIONS, DELETE");
-
-		response1.setHeader("Access-Control-Allow-Headers", "x-requested-with,authorization,Authorization");
-		response1.setHeader("Access-Control-Allow-Credentials", "true");
-		
-
-		response1.setHeader("Access-Control-Expose-Headers", "x-requested-with");
+		httpResponse.setHeader("Access-Control-Allow-Origin", "https://ror20.herokuapp.com");
+	        httpResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
+        	httpResponse.setHeader("Access-Control-Allow-Headers", "X-Auth-Token, Content-Type");
+	        httpResponse.setHeader("Access-Control-Expose-Headers", "custom-header1, custom-header2");
+        	httpResponse.setHeader("Access-Control-Allow-Credentials", "false");
+	        httpResponse.setHeader("Access-Control-Max-Age", "4800");
 		chain.doFilter(request, response1);
 	}
 
