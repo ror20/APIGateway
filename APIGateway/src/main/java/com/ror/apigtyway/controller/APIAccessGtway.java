@@ -15,7 +15,7 @@ import com.ror.apigtyway.service.impl.APIGatewayServiceImpl;
 import com.ror.model.RORUser;
 import com.ror.vo.RORResponseVO;
 
-@CrossOrigin(origins = "https://ror20.herokuapp.com", maxAge = 3600)
+@CrossOrigin(origins = "http://ror20-api.herokuapp.com", maxAge = 3600)
 @RestController
 @RequestMapping(value = "/rorAPIGateway")
 public class APIAccessGtway {
