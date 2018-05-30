@@ -53,7 +53,7 @@ public class RORFilter implements Filter {
 	        httpResponse.setHeader("Access-Control-Expose-Headers", "custom-header1, custom-header2");
         	httpResponse.setHeader("Access-Control-Allow-Credentials", "false");
 	        httpResponse.setHeader("Access-Control-Max-Age", "4800");
-		chain.doFilter(request, response1);
+		chain.doFilter(request, httpResponse);
 	}
 
 	/**
