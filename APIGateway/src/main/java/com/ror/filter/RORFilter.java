@@ -11,9 +11,12 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Servlet Filter implementation class RORFilter
  */
+@Component
 public class RORFilter implements Filter {
 
 	/**
