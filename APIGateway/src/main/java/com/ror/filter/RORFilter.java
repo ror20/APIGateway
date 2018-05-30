@@ -55,7 +55,7 @@ public class RORFilter implements Filter {
 		response1.setHeader("Access-Control-Allow-Credentials", "true");
 		
 
-		response1.setHeader("Access-Control-Expose-Headers", "x-requested-with");
+		response1.setHeader("Access-Control-Expose-Headers", "x-requested-with,authorization,Authorization");
 		chain.doFilter(request, response1);
 	}
 
