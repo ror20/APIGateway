@@ -20,29 +20,42 @@
 		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
 
- 	<filter>
+	<filter>
 		<filter-name>CorsFilter</filter-name>
 		<filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
-			<init-param>
-    				<param-name>cors.allowed.origins</param-name>
-    				<param-value>http://ror20-api.herokuapp.com</param-value>
-			</init-param>
-		</filter>
+		<init-param>
+			<param-name>cors.allowed.origins</param-name>
+			<param-value>http://ror20-api.herokuapp.com</param-value>
+		</init-param>
+		<init-param>
+			<param-name>cors.allowed.methods</param-name>
+			<param-value>GET,POST,OPTIONS,PUT,DELETE</param-value>
+		</init-param>
+		<init-param>
+			<param-name>cors.allowed.headers</param-name>
+			<param-value>Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization</param-value>
+		</init-param>
+		<init-param>
+			<param-name>cors.exposed.headers</param-name>
+			<param-value>Access-Control-Allow-Origin,Access-Control-Allow-Credentials,X-Total-Count,WWW-Authenticate</param-value>
+		</init-param>
+		<init-param>
+			<param-name>cors.support.credentials</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>cors.preflight.maxage</param-name>
+			<param-value>10</param-value>
+		</init-param>
+	</filter>
 	<filter-mapping>
 		<filter-name>CorsFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-<!--	<filter>
-		<display-name>RORFilter</display-name>
-		<filter-name>RORFilter</filter-name>
-		<filter-class>com.ror.filter.RORFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>RORFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
-	<filter> <filter-name>springSecurityFilterChain</filter-name> <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class> 
+	<!-- <filter> <display-name>RORFilter</display-name> <filter-name>RORFilter</filter-name> 
+		<filter-class>com.ror.filter.RORFilter</filter-class> </filter> <filter-mapping> 
+		<filter-name>RORFilter</filter-name> <url-pattern>/*</url-pattern> </filter-mapping> 
+		<filter> <filter-name>springSecurityFilterChain</filter-name> <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class> 
 		</filter> <filter-mapping> <filter-name>springSecurityFilterChain</filter-name> 
 		<url-pattern>/*</url-pattern> </filter-mapping> -->
 
