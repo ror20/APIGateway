@@ -49,7 +49,7 @@ public class RORFilter implements Filter {
 
 		httpResponse.setHeader("Access-Control-Allow-Origin", "https://ror20.herokuapp.com");
 	        httpResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
-        	httpResponse.setHeader("Access-Control-Allow-Headers", "X-Auth-Token, Content-Type,Authorization");
+        	httpResponse.setHeader("Access-Control-Allow-Headers", "X-Auth-Token, Content-Type,Authorization,authorization");
         	httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
 	        httpResponse.setHeader("Access-Control-Max-Age", "4800");
 		chain.doFilter(request, httpResponse);
