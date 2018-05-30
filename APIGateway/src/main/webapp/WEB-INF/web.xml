@@ -20,7 +20,7 @@
 		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
 
-<!-- 	<filter>
+ 	<filter>
 		<filter-name>CorsFilter</filter-name>
 		<filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
 			<init-param>
@@ -32,7 +32,7 @@
 		<filter-name>CorsFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	<filter>
+<!--	<filter>
 		<display-name>RORFilter</display-name>
 		<filter-name>RORFilter</filter-name>
 		<filter-class>com.ror.filter.RORFilter</filter-class>
