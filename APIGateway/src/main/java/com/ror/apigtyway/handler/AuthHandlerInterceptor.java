@@ -13,6 +13,10 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 public class AuthHandlerInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+		if(request.getMethod().equalsIgnoreCase("options")) {
+			response.setStatus(HttpServletResponse.SC_OK);
+			return false;
+		}
 		String authHeader = request.getHeader(AUTHORIZATION);
 		System.out.println("The Following host has hit APIGateway" + request.getRequestURL()+authHeader);
 		if (authHeader != null && !authHeader.isEmpty()) {
