@@ -8,9 +8,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ror.apigtyway.service.impl.APIGatewayServiceImpl;
+import com.ror.exception.RORException;
+import com.ror.model.MessageDetails;
+import com.ror.model.RORMessages;
 import com.ror.model.RORUser;
 import com.ror.vo.RORResponseVO;
 
@@ -50,6 +54,27 @@ public class APIAccessGtway {
 	@RequestMapping(value = "/checkUserExist/{id}", method = RequestMethod.GET, produces = "application/json")
 	public boolean checkUserExists(@PathVariable("id") String userId) {
 		return apiGatewayServiceImpl.checkUserExists(userId);
+	}
+	
+	@RequestMapping(value = "/messages/received/{id}", method = RequestMethod.GET)
+	public @ResponseBody List<MessageDetails> receivedMessage(@PathVariable("id") String id) {
+		return apiGatewayServiceImpl.receivedMessage(id);
+	}
+
+	@RequestMapping(value = "/messages/draft", method = RequestMethod.POST)
+	public @ResponseBody RORResponseVO draftMessage(@RequestBody MessageDetails messageDetails) {
+		return apiGatewayServiceImpl.draftMessage(messageDetails);
+	}
+
+
+	@RequestMapping(value = "/messages/details/{id}", method = RequestMethod.GET)
+	public @ResponseBody RORMessages messageComepleteDetails(@PathVariable("id") String id) {
+		return apiGatewayServiceImpl.messageComepleteDetails(id);
+	}
+	
+	@RequestMapping(value = "/messages/convo/{u1andu2}", method = RequestMethod.GET)
+	public @ResponseBody List<MessageDetails> fetchConversation(@PathVariable("u1andu2") String u1andu2) throws RORException {
+		return apiGatewayServiceImpl.fetchConversation(u1andu2);
 	}
 
 }

@@ -12,6 +12,8 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.ror.apigtyway.service.APIGatewayService;
+import com.ror.model.MessageDetails;
+import com.ror.model.RORMessages;
 import com.ror.model.RORUser;
 import com.ror.vo.RORResponseVO;
 
@@ -38,7 +40,9 @@ public class APIGatewayServiceImpl implements APIGatewayService {
 
 	@Value("${ROR_CHECK_USER_EXISTS}")
 	String checkUserExists;
-	
+
+	@Value("${ROR_RECEIVE_MESSAGE}")
+	String receiveMessage;
 
 	public List<RORUser> fetchAllUsers() {
 		List<RORUser> rorUserList = null;
@@ -108,5 +112,23 @@ public class APIGatewayServiceImpl implements APIGatewayService {
 		String finalUrl = MessageFormat.format(checkUserExists, userId);
 		System.out.println("final check user url is " + finalUrl);
 		return restTemplate.getForObject(finalUrl, Boolean.class);
+	}
+
+	public List<MessageDetails> receivedMessage(String id) {
+		String finalUrl = MessageFormat.format(receiveMessage, id);
+		System.out.println("final check user url is " + finalUrl);
+		return restTemplate.getForObject(finalUrl, List.class);
+	}
+
+	public RORResponseVO draftMessage(MessageDetails messageDetails) {
+		return restTemplate.getForObject(finalUrl, Boolean.class);
+	}
+
+	public RORMessages messageComepleteDetails(String id) {
+		return null;
+	}
+
+	public List<MessageDetails> fetchConversation(String u1andu2) {
+		return null;
 	}
 }
