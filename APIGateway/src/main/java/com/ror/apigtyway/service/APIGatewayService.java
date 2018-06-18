@@ -24,7 +24,7 @@ public interface APIGatewayService {
 
 	public RORResponseVO draftMessage(MessageDetails messageDetails);
 
-	public RORMessages messageComepleteDetails(String id);
+	public RORMessages messageCompleteDetails(String id);
 	
 	public List<MessageDetails> fetchConversation(String u1andu2);
 

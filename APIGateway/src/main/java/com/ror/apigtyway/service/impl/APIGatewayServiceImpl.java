@@ -44,6 +44,12 @@ public class APIGatewayServiceImpl implements APIGatewayService {
 	@Value("${ROR_RECEIVE_MESSAGE}")
 	String receiveMessage;
 
+	@Value("${ROR_DRAFT_MESSAGE}")
+	String draftMessage;
+
+	@Value("${ROR_DETAILS_MESSAGE}")
+	String completeMessageDetails;
+
 	public List<RORUser> fetchAllUsers() {
 		List<RORUser> rorUserList = null;
 		try {
@@ -121,14 +127,18 @@ public class APIGatewayServiceImpl implements APIGatewayService {
 	}
 
 	public RORResponseVO draftMessage(MessageDetails messageDetails) {
-		return restTemplate.getForObject(finalUrl, Boolean.class);
+		return restTemplate.postForObject(draftMessage, messageDetails, RORResponseVO.class);
 	}
 
-	public RORMessages messageComepleteDetails(String id) {
-		return null;
+	public RORMessages messageCompleteDetails(String id) {
+		String finalUrl = MessageFormat.format(checkUserExists, id);
+		System.out.println("final check user url is " + finalUrl);
+		return restTemplate.getForObject(completeMessageDetails, RORMessages.class);
 	}
 
 	public List<MessageDetails> fetchConversation(String u1andu2) {
-		return null;
+		String finalUrl = MessageFormat.format(checkUserExists, u1andu2);
+		System.out.println("final check user url is " + finalUrl);
+		return restTemplate.getForObject(completeMessageDetails, List.class);
 	}
 }
